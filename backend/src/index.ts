@@ -36,7 +36,8 @@ app.use(cors({
     if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
       return callback(null, true);
     } else {
-      return callback(new Error('Not allowed by CORS'), false);
+      console.warn(`[CORS] ❌ Blocked origin: "${origin}". Allowed origins:`, allowedOrigins);
+      return callback(new Error(`Not allowed by CORS: Origin "${origin}" is not in the FRONTEND_URL whitelist.`), false);
     }
   },
   credentials: true
